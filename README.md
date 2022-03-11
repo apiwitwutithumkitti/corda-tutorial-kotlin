@@ -140,3 +140,28 @@ You should extend this template as follows:
 
 For a guided example of how to extend this template, see the Hello, World! tutorial 
 [here](https://docs.corda.net/hello-world-introduction.html).
+
+# The story
+This example showcases a delivery versus payment (DvP) scenario. You are building a CorDapp for an apple orchard that wants to offer a way for customers to purchase a voucher that they will later redeem for a bushel of apples.
+
+There are two parties involved in this transaction:
+
+The owner of the orchard - Farmer Bob.
+A customer - let’s call him Peter.
+Your CorDapp must follow this process:
+
+1. Farmer Bob creates and issues a voucher to Peter for the apples he wishes to buy.
+2. Farmer Bob prepares the amount of apples Peter requested.
+3. Peter goes to the orchard to pick up his apples and redeems his voucher.
+4. The voucher is marked as spent and Farmer Bob gives Peter his apples.
+5. An important feature of this CorDapp is that the voucher cannot be used more than once. It must be considered invalid after it is redeemed.
+
+# How will it work on Corda?
+1. Farmer Bob issues a voucher to Peter via a ledger transaction. In your CorDapp this voucher is called AppleStamp and is a state on the ledger . One transaction has been performed so far.
+2. When Farmer Bob prepares the apples Peter requested, he self-issues a bushel of apples via a self-issue transaction. This is another state on the ledger - BasketofApples. Two transactions have been performed so far.
+3. Next, Peter goes to the orchard to pick up his apples and redeems his voucher, triggering a transaction on the ledger that consumes the AppleStamp state. Three transactions have been performed so far.
+4. The BasketofApples state is transferred to Peter when the AppleStamp state is consumed and Farmer Bob gives Peter his apples.
+
+All of these transactions are initiated by flows.
+
+
