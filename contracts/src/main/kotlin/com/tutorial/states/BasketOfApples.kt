@@ -1,9 +1,13 @@
 package com.tutorial.states
 
+import com.tutorial.contracts.AppleStampContract
+import com.tutorial.contracts.BasketOfApplesContract
+import net.corda.core.contracts.BelongsToContract
 import net.corda.core.contracts.ContractState
 import net.corda.core.identity.AbstractParty
 import net.corda.core.identity.Party
 
+@BelongsToContract(BasketOfApplesContract::class)
 class BasketOfApples (
     val description : String, // Brand or type
     val farm : Party, // Origin of the apple
